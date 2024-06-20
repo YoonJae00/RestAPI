@@ -14,6 +14,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 public class Menu {
 
+
     @Id
     @Column(name = "menu_code")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
