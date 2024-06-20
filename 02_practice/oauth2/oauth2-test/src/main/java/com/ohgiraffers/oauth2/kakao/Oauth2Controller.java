@@ -27,17 +27,22 @@ public class Oauth2Controller {
 //    @ResponseBody
     public String kakaoLogin(@Value("${kakao.api_key}") String apikey, Model model,
                              @RequestParam String code, HttpServletRequest request) {
+        String accessToken = kakaoAPI.getAccessToken(code);
+
+        Map<String, Object> userInfo = kakaoAPI.getUserInfo(accessToken);
 
         model.addAttribute("apikey", apikey);
-        System.out.println("apikey = " + apikey);
-        System.out.println(code);
-        System.out.println(request);
+
         return "redirect:/result";
     }
 
     @GetMapping("/result")
-    public String kakaoLogin(Model model) {
+    public String kakaoLogin(Model model,
+                             HttpServletRequest request) {
+        Map<String, String[]> parameters = request.getParameterMap();
 
+
+        System.out.println("parameters = " + parameters);
         return "main/result";
     }
 
